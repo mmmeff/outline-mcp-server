@@ -1,147 +1,259 @@
-# Outline MCP Server
+# Outline Knowledge Base Desktop Extension
 
-[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=outline&config=eyJjb21tYW5kIjoibnB4IC15IC0tcGFja2FnZT1vdXRsaW5lLW1jcC1zZXJ2ZXJAbGF0ZXN0IC1jIG91dGxpbmUtbWNwLXNlcnZlci1zdGRpbyIsImVudiI6eyJPVVRMSU5FX0FQSV9LRVkiOiI8UkVQTEFDRV9NRT4iLCJPVVRMSU5FX0FQSV9VUkwiOiJodHRwczovL2FwcC5nZXRvdXRsaW5lLmNvbS9hcGkifX0%3D)
+A powerful Desktop Extension (DXT) for Claude Desktop that provides seamless access to your Outline knowledge bases. Search documents, retrieve content, and access team knowledge directly from Claude Desktop.
 
-![npm](https://img.shields.io/npm/v/outline-mcp-server) • ![downloads](https://img.shields.io/npm/dy/outline-mcp-server)
+## 🚀 Features
 
-A Model Context Protocol (MCP) server that provides tools for interacting with [Outline](https://www.getoutline.com/)'s API, enabling AI agents to manage documents, collections, and other entities programmatically through the Outline knowledge base platform.
+- **Document Search**: Search across your entire Outline knowledge base with natural language queries
+- **Full Document Access**: Retrieve complete document content including metadata
+- **Collection Management**: Browse and explore collections in your knowledge base
+- **Real-time Integration**: Access the latest information directly from your Outline instance
+- **Secure Authentication**: Uses API tokens for secure access to your data
+- **Cross-platform Support**: Works on Windows, macOS, and Linux
 
-## 🚨 \***\*Upgrade Notice:\*\*** v5 has introduced several breaking changes: 🚨
+## 📋 Prerequisites
 
-- the `--port` CLI flag has been migrated to an environment variable, `OUTLINE_MCP_PORT`
-- Minimum node version has been bumped to 20
-- sse & stdio were removed in 5.0.0 but later re-introduced in 5.1.0 and 5.2.0 respectively
+- [Claude Desktop](https://claude.ai/download) installed on your system
+- An Outline account with API access
+- Node.js 18.0.0 or higher (bundled with the extension)
 
-## Features
+## 🛠 Installation
 
-- **Document Management**
-  - ✅ Create new documents with customizable properties
-  - ✅ Get document details
-  - ✅ Update existing documents
-  - ✅ Delete documents
-  - ✅ List documents
-  - ✅ Search documents
-  - ✅ Ask natural language questions about documents
-  - ✅ Create templates from existing documents
-  - ✅ Move documents to different collections or locations
-  - ✅ Archive documents
+### Option 1: Install from Claude Desktop Extensions Directory
 
-- **Collection Management**
-  - ✅ Get collection details
-  - ✅ List collections
-  - ✅ Create and update collections
+1. Open Claude Desktop
+2. Go to Settings → Extensions
+3. Search for "Outline Knowledge Base"
+4. Click "Install"
 
-- **Comment Management**
-  - ✅ Create comments on documents
-  - ✅ Update existing comments
-  - ✅ Delete comments
+### Option 2: Manual Installation
 
-- **User Management**
-  - ✅ List and filter users
+1. Download the latest `.dxt` file from the [releases page](https://github.com/claude-extensions/outline-kb/releases)
+2. Open Claude Desktop
+3. Go to Settings → Extensions
+4. Click "Install from file" and select the downloaded `.dxt` file
 
-## Quick Start
+## ⚙️ Configuration
 
-### Prerequisites
+After installation, you'll need to configure the extension:
 
-- Node.js (v20 or higher)
-- Outline account with API access
-- Outline API key with appropriate permissions
-- Note: if you need to use the AI-powered ask feature, you must enable the "AI Answers" feature in your Outline Workspace settings
+1. **API URL**: The base URL of your Outline instance
+   - Example: `https://your-team.getoutline.com`
+   - For self-hosted instances: `https://outline.yourcompany.com`
 
-### Running
+2. **API Token**: Your personal API token from Outline
+   - Go to your Outline Settings → API
+   - Create a new token or use an existing one
+   - Copy the token (it will only be shown once)
 
-`outline-mcp-server` supports the latest streamable-http protocol, the deprecated sse protocol, and good ole fashioned stdio.
+3. **Optional Settings**:
+   - **Maximum Search Results**: Limit search results (default: 10)
+   - **Include Archived Documents**: Whether to include archived documents in searches
 
+## 🎯 Usage
+
+Once configured, you can use the following capabilities with Claude:
+
+### Searching Documents
+
+Ask Claude to search your knowledge base:
+
+```
+Search our knowledge base for information about API authentication
+```
+
+Claude will use the `search_documents` tool to find relevant documents and provide summaries.
+
+### Getting Specific Documents
+
+Request specific document content:
+
+```
+Can you get the full content of the document with ID "abc123"?
+```
+
+Claude will retrieve the complete document using the `get_document` tool.
+
+### Exploring Collections
+
+Browse your knowledge base structure:
+
+```
+What collections do we have in our knowledge base?
+```
+
+Claude will list all collections using the `list_collections` tool.
+
+### Document Information
+
+Get metadata about documents:
+
+```
+What can you tell me about document "def456"?
+```
+
+Claude will provide detailed metadata using the `get_document_info` tool.
+
+## 🔧 Available Tools
+
+The extension provides the following tools to Claude:
+
+### `search_documents`
+Search for documents across your Outline knowledge base.
+
+**Parameters:**
+- `query` (required): Search query string
+- `limit` (optional): Maximum results to return (1-50, default: 10)
+- `includeArchived` (optional): Include archived documents (default: false)
+
+### `get_document`
+Retrieve the full content of a specific document.
+
+**Parameters:**
+- `documentId` (required): The ID of the document to retrieve
+
+### `list_collections`
+List all collections in your knowledge base.
+
+**Parameters:**
+- `limit` (optional): Maximum collections to return (1-100, default: 25)
+
+### `get_document_info`
+Get metadata about a specific document.
+
+**Parameters:**
+- `documentId` (required): The ID of the document
+
+## 💡 Example Prompts
+
+Here are some example prompts you can use with Claude once the extension is configured:
+
+```
+Help me find documentation about our deployment process
+```
+
+```
+Search for any documents mentioning "database migration" and summarize the key points
+```
+
+```
+What's the latest information in our API documentation collection?
+```
+
+```
+Can you find and summarize our onboarding guides?
+```
+
+## 🔒 Security & Privacy
+
+- **API Token Security**: Your API token is stored securely in your system's keychain
+- **Local Processing**: All communication happens directly between Claude Desktop and your Outline instance
+- **No Data Storage**: The extension doesn't store or cache your documents locally
+- **Secure Transport**: All API communications use HTTPS encryption
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+**Extension won't connect to Outline**
+- Verify your API URL is correct and accessible
+- Check that your API token is valid and has the necessary permissions
+- Ensure your Outline instance is running and accessible
+
+**Search returns no results**
+- Check if you have permission to access the documents
+- Try different search terms
+- Verify that documents exist in your knowledge base
+
+**"Authentication failed" error**
+- Regenerate your API token in Outline settings
+- Update the extension configuration with the new token
+
+### Debug Mode
+
+To enable debug logging:
+
+1. Open Claude Desktop
+2. Go to Settings → Extensions → Outline Knowledge Base
+3. Enable "Debug Mode" (if available)
+4. Check the console logs for detailed error messages
+
+### Getting Help
+
+If you encounter issues:
+
+1. Check the [troubleshooting guide](https://github.com/claude-extensions/outline-kb/wiki/Troubleshooting)
+2. Search [existing issues](https://github.com/claude-extensions/outline-kb/issues)
+3. Create a [new issue](https://github.com/claude-extensions/outline-kb/issues/new) with:
+   - Your operating system
+   - Claude Desktop version
+   - Error messages (without sensitive information)
+   - Steps to reproduce the issue
+
+## 🔄 Updates
+
+The extension automatically updates when new versions are available. You can also:
+
+1. Check for updates in Claude Desktop Settings → Extensions
+2. Enable automatic updates for seamless experience
+
+## 📝 Development
+
+### Building from Source
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/claude-extensions/outline-kb.git
+   cd outline-kb
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Build the extension:
+   ```bash
+   npm run build
+   ```
+
+4. Package as DXT:
+   ```bash
+   npx @anthropic-ai/dxt pack
+   ```
+
+### Testing
+
+Run the test suite:
 ```bash
-# S-HTTP/SSE servers
-OUTLINE_API_KEY=... npx -y outline-mcp-server@latest
-
-# STDIO
-OUTLINE_API_KEY=... npx -y --package=outline-mcp-server@latest -c outline-mcp-server-stdio
+npm test
 ```
 
-### Cursor (mcp.json)
-
-Add the following MCP definition to your configuration:
-
-```json
-{
-  "outline": {
-    "command": "npx",
-    "args": ["-y", "outline-mcp-server-stdio@latest"],
-    "env": {
-      "OUTLINE_API_KEY": "<REPLACE_ME>",
-      "OUTLINE_API_URL": "https://app.getoutline.com/api",
-      "OUTLINE_MCP_PORT": "6060"
-    }
-  }
-}
-```
-
-### Env vars
-
-- `OUTLINE_API_KEY` (_required_): your API key for outline, duh
-- `OUTLINE_API_URL` (_optional_): Alternative URL for your outline API (if using an alt domain/self-hosting)
-- `OUTLINE_MCP_PORT` (_optional_): Specify the port on which the server will run (default: 6060)
-
-### Usage
-
-Once installed, you can use the MCP server with AI assistants that support the Model Context Protocol, such as Claude via Cursor.
-
-Example queries your AI assistant can now handle:
-
-- "List all the documents in my Outline workspace"
-- "Create a new document in the 'Product' collection"
-- "Find all documents related to a specific topic"
-- "Ask a natural language question about your documents"
-- "Create a template from an existing document"
-- "Update the content of a document"
-- "Add a comment to a document"
-
-## Development
-
+For development with hot reload:
 ```bash
-# Clone this repository
-git clone https://github.com/mmmeff/outline-mcp.git
-cd outline-mcp
-
-# Install dependencies
-npm install
-```
-
-### Create a `.env` file with your Outline API key:
-
-```
-OUTLINE_API_KEY=your_outline_api_key_here
-
-# Optional -------
-# OUTLINE_API_URL=https://your-outline-instance.com/api # defaults to https://app.getoutline.com/api
-# OUTLINE_MCP_PORT=9001
-```
-
-```bash
-# Builds/watches the project alongside running @modelcontextprotocol/inspector
 npm run dev
 ```
 
-## Contributing
+### Contributing
 
-This project uses [semantic-release](https://semantic-release.gitbook.io/semantic-release/) for automated versioning and package publishing. Please follow the [Conventional Commits](https://www.conventionalcommits.org/) specification for your commit messages to ensure proper versioning.
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines on how to contribute to this project.
+## 📄 License
 
-## Release Process
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-Releases are fully automated using semantic-release and GitHub Actions. When commits are pushed to the `master` branch, the following happens:
+## 🙏 Acknowledgments
 
-1. The CI pipeline runs tests and builds the package
-2. semantic-release analyzes commit messages to determine the next version number
-3. A new version is automatically published to npm
-4. A GitHub release is created with auto-generated release notes
-5. The CHANGELOG.md file is updated
+- [Anthropic](https://anthropic.com) for the Model Context Protocol and Desktop Extensions framework
+- [Outline](https://getoutline.com) for their excellent knowledge base platform
+- The open-source community for inspiration and feedback
 
-No manual version bumping or release creation is needed.
+## 📞 Support
 
-## License
+- **Documentation**: [GitHub Wiki](https://github.com/claude-extensions/outline-kb/wiki)
+- **Issues**: [GitHub Issues](https://github.com/claude-extensions/outline-kb/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/claude-extensions/outline-kb/discussions)
 
-MIT
+---
+
+**Made with ❤️ for the Claude Desktop community**

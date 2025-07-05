@@ -1,60 +1,62 @@
 {
-  "name": "outline-mcp-server",
-  "version": "5.2.1",
-  "description": "An MCP server for interacting with Outline's API",
+  "name": "outline-knowledge-base-extension",
+  "version": "1.0.0",
+  "description": "Claude Desktop Extension for accessing Outline knowledge bases",
   "type": "module",
+  "main": "server/index.js",
   "bin": {
-    "outline-mcp-server": "./build/index.js",
-    "outline-mcp-server-stdio": "./build/stdio.js"
+    "outline-kb-server": "server/index.js"
   },
-  "files": [
-    "build"
-  ],
-  "author": {
-    "name": "Matt Frey",
-    "email": "iam@mattfrey.dev"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/mmmeff/outline-mcp-server"
+  "engines": {
+    "node": ">=18.0.0"
   },
   "scripts": {
-    "build": "tsc && chmod +x build/index.js && chmod +x build/stdio.js",
-    "prepare": "npm run build",
-    "watch": "bun --watch src/index.ts",
-    "watch:stdio": "bun --watch src/stdio.ts",
-    "dev": "concurrently -n 'build,inspector' -c 'blue.bold,green.bold' 'npm run watch' 'npm run inspector'",
-    "inspector": "npx @modelcontextprotocol/inspector@latest",
-    "start": "bun build/index.js",
-    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json}\"",
-    "semantic-release": "semantic-release"
-  },
-  "dependencies": {
-    "@modelcontextprotocol/sdk": "1.13.1",
-    "axios": "1.10.0",
-    "dotenv": "16.5.0",
-    "fastify": "5.4.0",
-    "omit-ts": "^2.0.1",
-    "zod": "3.25.67"
-  },
-  "devDependencies": {
-    "@semantic-release/changelog": "^6.0.3",
-    "@semantic-release/git": "^10.0.1",
-    "@types/node": "20.19.1",
-    "bun": "^1.2.17",
-    "concurrently": "^9.2.0",
-    "prettier": "3.6.0",
-    "semantic-release": "^22.0.12",
-    "typescript": "5.x"
+    "start": "node server/index.js",
+    "dev": "NODE_ENV=development node server/index.js",
+    "test": "node --test",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "keywords": [
     "outline",
+    "knowledge-base",
+    "claude",
     "mcp",
-    "getoutline.com",
-    "model-context-protocol"
+    "desktop-extension",
+    "dxt",
+    "documentation",
+    "search"
   ],
+  "author": {
+    "name": "Claude Extension Developer",
+    "email": "developer@example.com",
+    "url": "https://github.com/claude-extensions"
+  },
   "license": "MIT",
-  "engines": {
-    "node": ">=20"
-  }
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/claude-extensions/outline-kb.git"
+  },
+  "bugs": {
+    "url": "https://github.com/claude-extensions/outline-kb/issues"
+  },
+  "homepage": "https://github.com/claude-extensions/outline-kb#readme",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "axios": "^1.6.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.56.0",
+    "@eslint/js": "^8.56.0"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/claude-extensions"
+  },
+  "files": [
+    "server/",
+    "manifest.json",
+    "README.md",
+    "LICENSE"
+  ]
 }

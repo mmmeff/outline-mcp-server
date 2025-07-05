@@ -1,86 +1,299 @@
-# Contributing to Outline MCP Server
+# Contributing to Outline Knowledge Base Extension
 
-Thank you for your interest in contributing to Outline MCP Server!
+Thank you for your interest in contributing to the Outline Knowledge Base Desktop Extension! This document provides guidelines and information for contributors.
 
-## Commit Message Guidelines
+## 🤝 How to Contribute
 
-We follow the [Conventional Commits](https://www.conventionalcommits.org/) specification for our commit messages. This leads to more readable messages that are easy to follow when looking through the project history and enables automatic versioning and changelog generation.
+### Reporting Issues
+
+If you encounter a bug or have a feature request:
+
+1. **Search existing issues** to avoid duplicates
+2. **Use the appropriate issue template** when creating a new issue
+3. **Provide detailed information** including:
+   - Operating system and version
+   - Claude Desktop version
+   - Extension version
+   - Steps to reproduce (for bugs)
+   - Expected vs actual behavior
+
+### Suggesting Features
+
+We welcome feature suggestions! Please:
+
+1. Check if the feature has already been requested
+2. Open a new issue with the "enhancement" label
+3. Describe the use case and expected behavior
+4. Consider the scope and complexity of the feature
+
+### Code Contributions
+
+#### Prerequisites
+
+- Node.js 18.0.0 or higher
+- npm or yarn
+- Git
+
+#### Development Setup
+
+1. **Fork the repository** on GitHub
+2. **Clone your fork** locally:
+   ```bash
+   git clone https://github.com/your-username/outline-kb.git
+   cd outline-kb
+   ```
+
+3. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+4. **Set up environment variables** for testing:
+   ```bash
+   cp .env.example .env
+   # Edit .env with your test Outline instance details
+   ```
+
+5. **Run tests** to ensure everything works:
+   ```bash
+   npm test
+   ```
+
+#### Making Changes
+
+1. **Create a feature branch**:
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+
+2. **Make your changes** following our coding standards
+
+3. **Write tests** for new functionality
+
+4. **Update documentation** if needed
+
+5. **Run the linter**:
+   ```bash
+   npm run lint
+   ```
+
+6. **Run tests**:
+   ```bash
+   npm test
+   ```
+
+#### Submitting Changes
+
+1. **Commit your changes** with a clear message:
+   ```bash
+   git commit -m "feat: add search result caching"
+   ```
+
+2. **Push to your fork**:
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+
+3. **Create a Pull Request** with:
+   - Clear title and description
+   - Reference to any related issues
+   - Screenshots if applicable
+
+## 📝 Coding Standards
+
+### Code Style
+
+- Use **2 spaces** for indentation
+- Follow **ESLint** configuration
+- Use **single quotes** for strings
+- Add **semicolons** at the end of statements
+- Use **camelCase** for variables and functions
+- Use **PascalCase** for classes
 
 ### Commit Message Format
 
-Each commit message consists of a **header**, a **body**, and a **footer**. The header has a special format that includes a **type**, a **scope**, and a **subject**:
+Follow the [Conventional Commits](https://www.conventionalcommits.org/) specification:
 
 ```
-<type>(<scope>): <subject>
-<BLANK LINE>
-<body>
-<BLANK LINE>
-<footer>
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
 ```
 
-The **header** is mandatory and the **scope** of the header is optional.
+**Types:**
+- `feat`: New feature
+- `fix`: Bug fix
+- `docs`: Documentation only changes
+- `style`: Code style changes (formatting, missing semicolons, etc.)
+- `refactor`: Code change that neither fixes a bug nor adds a feature
+- `test`: Adding missing tests or correcting existing tests
+- `chore`: Changes to the build process or auxiliary tools
 
-### Type
-
-Must be one of the following:
-
-- **feat**: A new feature
-- **fix**: A bug fix
-- **docs**: Documentation only changes
-- **style**: Changes that do not affect the meaning of the code (white-space, formatting, etc)
-- **refactor**: A code change that neither fixes a bug nor adds a feature
-- **perf**: A code change that improves performance
-- **test**: Adding missing tests or correcting existing tests
-- **build**: Changes that affect the build system or external dependencies
-- **ci**: Changes to our CI configuration files and scripts
-- **chore**: Other changes that don't modify src or test files
-- **revert**: Reverts a previous commit
-
-### Scope
-
-The scope should be the name of the npm package affected (as perceived by the person reading the changelog generated from commit messages).
-
-### Subject
-
-The subject contains a succinct description of the change:
-
-- use the imperative, present tense: "change" not "changed" nor "changes"
-- don't capitalize the first letter
-- no dot (.) at the end
-
-### Body
-
-The body should include the motivation for the change and contrast this with previous behavior.
-
-### Footer
-
-The footer should contain any information about **Breaking Changes** and is also the place to reference GitHub issues that this commit **Closes**.
-
-**Breaking Changes** should start with the word `BREAKING CHANGE:` with a space or two newlines. The rest of the commit message is then used for this.
-
-### Examples
-
+**Examples:**
 ```
-feat(api): add ability to specify document templates
-
-Adds a new parameter to document creation to specify if it's a template.
-
-Closes #123
+feat: add document caching functionality
+fix: handle network timeouts gracefully
+docs: update API documentation
+test: add unit tests for search functionality
 ```
 
-```
-fix(auth): handle expired tokens properly
+### Documentation
 
-BREAKING CHANGE: The auth token format has changed and requires re-authentication.
+- Add **JSDoc comments** for all functions and classes
+- Update **README.md** for user-facing changes
+- Update **API documentation** for new tools or parameters
+- Include **examples** for new features
+
+### Testing
+
+- Write **unit tests** for new functions
+- Add **integration tests** for new tools
+- Ensure **test coverage** doesn't decrease
+- Test on **multiple platforms** if possible
+
+## 🧪 Testing Guidelines
+
+### Running Tests
+
+```bash
+# Run all tests
+npm test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Run tests with coverage
+npm run test:coverage
 ```
 
-```
-docs(readme): update installation instructions
+### Test Structure
+
+- Place tests in the `test/` directory
+- Use descriptive test names
+- Group related tests using `describe` blocks
+- Use `beforeEach` and `afterEach` for setup/cleanup
+
+### Example Test
+
+```javascript
+import { describe, it, beforeEach } from 'node:test';
+import assert from 'node:assert';
+
+describe('OutlineKBServer', () => {
+  beforeEach(() => {
+    // Setup test environment
+  });
+
+  it('should search documents successfully', async () => {
+    // Test implementation
+    assert.ok(result);
+  });
+});
 ```
 
-## Pull Request Process
+## 🔧 Development Tools
 
-1. Ensure any install or build dependencies are removed before the end of the layer when doing a build.
-2. Update the README.md with details of changes to the interface, this includes new environment variables, exposed ports, useful file locations, and container parameters.
-3. The versioning scheme we use is [SemVer](http://semver.org/). The version will be automatically bumped based on your commit messages.
-4. You may merge the Pull Request once you have the sign-off of at least one other developer, or if you do not have permission to do that, you may request the reviewer to merge it for you.
+### Available Scripts
+
+- `npm start` - Start the server
+- `npm run dev` - Start in development mode
+- `npm test` - Run tests
+- `npm run lint` - Run ESLint
+- `npm run lint:fix` - Fix ESLint issues automatically
+
+### Debugging
+
+1. **Enable debug mode**:
+   ```bash
+   NODE_ENV=development npm run dev
+   ```
+
+2. **Use console logging** sparingly in production code
+
+3. **Add proper error handling** with meaningful messages
+
+## 🏗️ Project Structure
+
+```
+outline-kb/
+├── server/           # MCP server implementation
+│   └── index.js     # Main server file
+├── test/            # Test files
+├── manifest.json    # DXT manifest
+├── package.json     # Node.js package configuration
+├── README.md        # User documentation
+├── CONTRIBUTING.md  # This file
+└── LICENSE          # MIT license
+```
+
+## 🚀 Release Process
+
+1. **Update version** in `package.json` and `manifest.json`
+2. **Update CHANGELOG.md** with new features and fixes
+3. **Create a pull request** for the release
+4. **Tag the release** after merging:
+   ```bash
+   git tag v1.1.0
+   git push origin v1.1.0
+   ```
+
+## 📋 Pull Request Checklist
+
+Before submitting a pull request, ensure:
+
+- [ ] Code follows the style guidelines
+- [ ] Tests pass locally
+- [ ] New functionality includes tests
+- [ ] Documentation is updated
+- [ ] Commit messages follow the conventional format
+- [ ] No sensitive information is included
+- [ ] Changes are backwards compatible (or properly versioned)
+
+## 🎯 Areas for Contribution
+
+We welcome contributions in these areas:
+
+### High Priority
+- **Error handling improvements**
+- **Performance optimizations**
+- **Additional Outline API endpoints**
+- **Better user configuration validation**
+
+### Medium Priority
+- **Caching mechanisms**
+- **Rate limiting**
+- **Bulk operations**
+- **Advanced search filters**
+
+### Documentation
+- **API documentation**
+- **Troubleshooting guides**
+- **Video tutorials**
+- **Best practices guides**
+
+## 💬 Getting Help
+
+If you need help with development:
+
+1. **Check the documentation** first
+2. **Search existing issues** for similar questions
+3. **Ask in GitHub Discussions** for general questions
+4. **Create an issue** for specific problems
+
+## 🙏 Recognition
+
+Contributors will be recognized in:
+
+- **CHANGELOG.md** for each release
+- **README.md** contributors section
+- **GitHub contributors** page
+
+## 📄 License
+
+By contributing to this project, you agree that your contributions will be licensed under the MIT License.
+
+---
+
+Thank you for contributing to the Outline Knowledge Base Extension! 🎉

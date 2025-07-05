@@ -1,0 +1,128 @@
+{
+  "dxt_version": "0.1",
+  "name": "outline-knowledge-base",
+  "display_name": "Outline Knowledge Base Extension",
+  "version": "1.0.0",
+  "description": "Access and search your Outline knowledge base from Claude Desktop",
+  "long_description": "This extension provides seamless integration with Outline knowledge bases, allowing you to search documents, retrieve content, and access team knowledge directly from Claude Desktop. Perfect for teams using Outline for documentation and knowledge management.",
+  "author": {
+    "name": "Claude Extension Developer",
+    "email": "developer@example.com",
+    "url": "https://github.com/claude-extensions/outline-kb"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/claude-extensions/outline-kb"
+  },
+  "homepage": "https://github.com/claude-extensions/outline-kb",
+  "documentation": "https://github.com/claude-extensions/outline-kb/blob/main/README.md",
+  "support": "https://github.com/claude-extensions/outline-kb/issues",
+  "icon": "icon.png",
+  "keywords": ["outline", "knowledge-base", "documentation", "search", "team"],
+  "license": "MIT",
+  "server": {
+    "type": "node",
+    "entry_point": "server/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/server/index.js"],
+      "env": {
+        "OUTLINE_API_URL": "${user_config.api_url}",
+        "OUTLINE_API_TOKEN": "${user_config.api_token}",
+        "NODE_ENV": "production"
+      },
+      "platforms": {
+        "win32": {
+          "command": "node.exe"
+        },
+        "darwin": {
+          "env": {
+            "TMPDIR": "${TMPDIR}"
+          }
+        },
+        "linux": {
+          "env": {
+            "TMPDIR": "/tmp"
+          }
+        }
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "search_documents",
+      "description": "Search for documents across your Outline knowledge base"
+    },
+    {
+      "name": "get_document",
+      "description": "Retrieve the full content of a specific document"
+    },
+    {
+      "name": "list_collections",
+      "description": "List all collections in your Outline knowledge base"
+    },
+    {
+      "name": "get_document_info",
+      "description": "Get metadata about a specific document"
+    }
+  ],
+  "prompts": [
+    {
+      "name": "knowledge_search",
+      "description": "Search and analyze knowledge base content",
+      "arguments": ["query", "context"],
+      "text": "Search the knowledge base for information about: ${arguments.query}. Context: ${arguments.context}"
+    },
+    {
+      "name": "document_summary",
+      "description": "Summarize a specific document from the knowledge base",
+      "arguments": ["document_id"],
+      "text": "Please provide a comprehensive summary of the document with ID: ${arguments.document_id}"
+    }
+  ],
+  "tools_generated": true,
+  "compatibility": {
+    "claude_desktop": ">=1.0.0",
+    "platforms": ["darwin", "win32", "linux"],
+    "runtimes": {
+      "node": ">=18.0.0"
+    }
+  },
+  "user_config": {
+    "api_url": {
+      "type": "string",
+      "title": "Outline API URL",
+      "description": "The base URL of your Outline instance (e.g., https://your-team.getoutline.com)",
+      "required": true,
+      "validation": {
+        "pattern": "^https?://.*",
+        "message": "Please enter a valid URL starting with http:// or https://"
+      }
+    },
+    "api_token": {
+      "type": "string",
+      "title": "API Token",
+      "description": "Your Outline API token (found in Settings > API)",
+      "sensitive": true,
+      "required": true,
+      "validation": {
+        "minLength": 10,
+        "message": "API token must be at least 10 characters long"
+      }
+    },
+    "max_results": {
+      "type": "number",
+      "title": "Maximum Search Results",
+      "description": "Maximum number of results to return from searches",
+      "default": 10,
+      "min": 1,
+      "max": 50
+    },
+    "include_archived": {
+      "type": "boolean",
+      "title": "Include Archived Documents",
+      "description": "Whether to include archived documents in search results",
+      "default": false
+    }
+  }
+}
