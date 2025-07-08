@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/mmmeff-outline-mcp-server-badge.png)](https://mseep.ai/app/mmmeff-outline-mcp-server)
+
 # Outline MCP Server
 
 ![npm](https://img.shields.io/npm/v/outline-mcp-server) • ![downloads](https://img.shields.io/npm/dy/outline-mcp-server)
