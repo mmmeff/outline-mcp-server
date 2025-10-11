@@ -205,7 +205,6 @@ npm run dev
 This project uses [semantic-release](https://semantic-release.gitbook.io/semantic-release/) for automated versioning and package publishing. Please follow the [Conventional Commits](https://www.conventionalcommits.org/) specification for your commit messages to ensure proper versioning.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines on how to contribute to this project.
-See [RELEASE.md](RELEASE.md) for details on the release process.
 
 ## Release Process
 
