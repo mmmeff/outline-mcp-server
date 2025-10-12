@@ -1,3 +1,16 @@
+# [5.6.0](https://github.com/mmmeff/outline-mcp-server/compare/v5.5.5...v5.6.0) (2025-10-12)
+
+
+### Bug Fixes
+
+* update Dockerfile and release docs with owner placeholder. ([7bcc875](https://github.com/mmmeff/outline-mcp-server/commit/7bcc8757fef83f90058219313c19e23005238904))
+* Update with repository owner username. ([7464bd9](https://github.com/mmmeff/outline-mcp-server/commit/7464bd9476a14e955f96f531acb1be5acf082933))
+
+
+### Features
+
+* add GHCR publish workflow, optimize Dockerfile, and update release docs ([56860ce](https://github.com/mmmeff/outline-mcp-server/commit/56860ceada390a356ef49fddc1eff674e25cdaab))
+
 ## [5.5.5](https://github.com/mmmeff/outline-mcp-server/compare/v5.5.4...v5.5.5) (2025-09-01)
 
 
