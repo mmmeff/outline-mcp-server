@@ -1,5 +1,6 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { loadAllTools } from './loadAllTools.js';
+import type { ToolDefinition } from './toolRegistry.js';
 
 // Helper to create a new MCP server instance with all tools registered
 export async function getMcpServer() {
@@ -9,7 +10,7 @@ export async function getMcpServer() {
     description: 'Outline Model Context Protocol server',
   });
 
-  await loadAllTools(tool =>
+  await loadAllTools((tool: ToolDefinition<any, any>) => {
     server.registerTool(
       tool.name,
       {
@@ -18,8 +19,8 @@ export async function getMcpServer() {
         outputSchema: tool.outputSchema,
       },
       tool.callback
-    )
-  );
+    );
+  });
 
   return server;
 }

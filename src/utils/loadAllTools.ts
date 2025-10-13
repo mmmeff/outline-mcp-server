@@ -1,12 +1,12 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
-import toolRegistry from './toolRegistry.js';
+import toolRegistry, { type ToolDefinition } from './toolRegistry.js';
 
 /**
  * Dynamically imports all tool files from the tools directory
  */
-export async function loadAllTools(onToolLoaded) {
+export async function loadAllTools(onToolLoaded: (tool: ToolDefinition<any, any>) => void | Promise<void>) {
     // Get the directory path
     const __filename = fileURLToPath(import.meta.url);
     const __dirname = path.dirname(__filename);
