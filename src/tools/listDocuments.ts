@@ -36,15 +36,31 @@ toolRegistry.register('list_documents', {
         limit: args.limit || 25,
         sort: args.sort || 'updatedAt',
         direction: args.direction || 'DESC',
-        collectionId: args.collectionId || '',
-        userId: args.userId || '',
-        backlinkDocumentId: args.backlinkDocumentId || '',
-        parentDocumentId: args.parentDocumentId || '',
       };
 
       // Only add template if it's explicitly defined
       if (args.template !== undefined) {
         payload.template = args.template;
+      }
+
+      // Only add collectionId if it's provided
+      if (args.collectionId) {
+        payload.collectionId = args.collectionId;
+      }
+
+      // Only add userId if it's provided
+      if (args.userId) {
+        payload.userId = args.userId;
+      }
+
+      // Only add backlinkDocumentId if it's provided
+      if (args.backlinkDocumentId) {
+        payload.backlinkDocumentId = args.backlinkDocumentId;
+      }
+
+      // Only add parentDocumentId if it's provided
+      if (args.parentDocumentId) {
+        payload.parentDocumentId = args.parentDocumentId;
       }
 
       // Only add query if it's provided
