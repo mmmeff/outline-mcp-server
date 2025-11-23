@@ -19,22 +19,30 @@ function extractApiKey(request: any): string | undefined {
 }
 
 /**
- * Sets up request context with API key
+ * Extracts API URL from request headers
+ */
+function extractApiUrl(request: any): string | undefined {
+  // Check common header variations
+  const headers = request.headers;
+  return headers['x-outline-api-url'] || headers['outline-api-url'];
+}
+
+/**
+ * Sets up request context with API key and API URL
  */
 function setupRequestContext(request: any): void {
+  const context = RequestContext.getInstance();
+
+  // Handle API key
   const apiKey = extractApiKey(request);
   const envApiKey = process.env.OUTLINE_API_KEY;
 
   if (apiKey) {
     // Use header API key
-    const context = RequestContext.getInstance();
     context.setApiKey(apiKey);
-    console.log('Using API key from request headers');
   } else if (envApiKey) {
     // Use environment variable API key
-    const context = RequestContext.getInstance();
     context.setApiKey(envApiKey);
-    console.log('Using API key from environment variable');
   } else {
     // No API key available
     console.log('No API key provided in headers and no default environment variable set.');
@@ -44,6 +52,22 @@ function setupRequestContext(request: any): void {
     throw new Error(
       'API key required: Set OUTLINE_API_KEY environment variable or provide x-outline-api-key header'
     );
+  }
+
+  // Handle API URL
+  const apiUrl = extractApiUrl(request);
+  const envApiUrl = process.env.OUTLINE_API_URL;
+
+  if (apiUrl) {
+    // Use header API URL
+    context.setApiUrl(apiUrl);
+  } else if (envApiUrl) {
+    // Use environment variable API URL
+    context.setApiUrl(envApiUrl);
+  } else {
+    // Use default API URL
+    const defaultUrl = 'https://app.getoutline.com/api';
+    context.setApiUrl(defaultUrl);
   }
 }
 
@@ -159,9 +183,14 @@ app.listen({ port: PORT, host: HOST }, (err, address) => {
   console.log(
     `\n\nOutline MCP Server running:\n\tstreamable-http: http://${HOST}:${PORT}/mcp\n\tsse (deprecated): http://${HOST}:${PORT}/sse\n\n`
   );
-  console.log('API Key Configuration:');
+  console.log('Configuration Options:');
+  console.log('\nAPI Key:');
   console.log('- Set OUTLINE_API_KEY environment variable for default authentication');
   console.log('- Or provide x-outline-api-key header in requests for per-request authentication');
   console.log('- Or provide authorization header with Bearer token');
+  console.log('\nAPI URL:');
+  console.log('- Set OUTLINE_API_URL environment variable for default Outline instance');
+  console.log('- Or provide x-outline-api-url header in requests for per-request instance');
+  console.log('- Defaults to https://app.getoutline.com/api if not specified');
   console.log('\nTo use this MCP server in stdio mode, run it via `outline-mcp-server-stdio`.');
 });

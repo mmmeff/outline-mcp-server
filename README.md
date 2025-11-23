@@ -90,9 +90,11 @@ Add the following MCP definition to your configuration:
 }
 ```
 
-### Authentication
+### Authentication & Configuration
 
-The Outline MCP server supports two authentication methods:
+The Outline MCP server supports flexible configuration for both authentication and API endpoint selection:
+
+#### API Key Authentication
 
 1. **Environment Variable (Required for stdio mode)**: Set `OUTLINE_API_KEY` as an environment variable
 2. **Request Headers (HTTP/SSE modes)**: Provide the API key in request headers
@@ -104,15 +106,27 @@ For **HTTP/SSE modes**, you have two options:
 - Set `OUTLINE_API_KEY` as an environment variable (fallback method)
 - Provide API key in request headers (recommended for per-request authentication)
 
-#### Header-based Authentication
+#### Header-based Authentication & API URL
 
-When using HTTP/SSE endpoints, you can provide the API key using any of these headers:
+When using HTTP/SSE endpoints, you can provide the API key and API URL using headers for **per-request configuration**:
 
+**API Key headers:**
 - `x-outline-api-key: your_api_key_here`
 - `outline-api-key: your_api_key_here`
 - `authorization: Bearer your_api_key_here`
 
-If no header is provided, the server will fall back to the `OUTLINE_API_KEY` environment variable. If neither is available, the request will fail with an authentication error.
+**API URL headers (for multi-tenant or self-hosted instances):**
+- `x-outline-api-url: https://your-company.getoutline.com/api`
+- `outline-api-url: https://your-company.getoutline.com/api`
+
+This allows a single MCP server instance to work with multiple Outline workspaces or self-hosted instances. Each request can specify its own API key and URL.
+
+**Priority order:**
+1. Request headers (highest priority)
+2. Environment variables
+3. Default values (for API URL only: `https://app.getoutline.com/api`)
+
+If no API key is provided via headers or environment variables, the request will fail with an authentication error.
 
 ### Env vars
 
