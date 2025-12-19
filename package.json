@@ -34,6 +34,7 @@
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.13.1",
     "axios": "1.10.0",
+    "diff": "^5.2.0",
     "dotenv": "16.5.0",
     "fastify": "5.4.0",
     "omit-ts": "^2.0.1",
@@ -42,6 +43,7 @@
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
+    "@types/diff": "^5.2.3",
     "@types/node": "20.19.1",
     "bun": "^1.2.17",
     "concurrently": "^9.2.0",

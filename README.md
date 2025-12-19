@@ -24,6 +24,7 @@ One click install in Cursor:
   - ✅ Create new documents with customizable properties
   - ✅ Get document details
   - ✅ Update existing documents
+  - ✅ Apply unified diff patches to documents (efficient for large document updates)
   - ✅ Delete documents
   - ✅ List documents
   - ✅ Search documents
@@ -133,6 +134,8 @@ Example queries your AI assistant can now handle:
 - "Ask a natural language question about your documents"
 - "Create a template from an existing document"
 - "Update the content of a document"
+- "Apply this patch to update the API documentation"
+- "Use git-style diff to update only the changed sections of the document"
 - "Add a comment to a document"
 
 ## Docker Usage
