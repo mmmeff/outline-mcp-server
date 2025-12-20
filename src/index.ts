@@ -37,6 +37,13 @@ function setupRequestContext(request: any): void {
 
   const context = RequestContext.getInstance();
 
+  // Security: Prevent credential leakage - custom URL requires explicit API key
+  if (apiUrl && !apiKey) {
+    throw new Error(
+      'Security: Custom API URL requires explicit API key in x-outline-api-key header'
+    );
+  }
+
   // Handle API key
   if (apiKey) {
     // Use header API key

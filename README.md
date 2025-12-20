@@ -124,6 +124,8 @@ You can override both the API key and API URL on a per-request basis using heade
 - `x-outline-api-key` or `outline-api-key`: API key for the specific instance
 - `x-outline-api-url` or `outline-api-url`: API URL for the specific instance
 
+**Security Note**: When providing a custom API URL via headers, you **must** also provide an explicit API key in the same request headers.
+
 **Example**: Connect to different Outline instances in different requests:
 
 ```bash
