@@ -1,0 +1,28 @@
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '127.0.0.1:${OUTLINE_MCP_PORT:-6060}:6060'
+    environment:
+      OUTLINE_API_KEY: ${OUTLINE_API_KEY}
+      OUTLINE_API_URL: ${OUTLINE_API_URL}
+      OUTLINE_MCP_HOST: ${OUTLINE_MCP_HOST:-0.0.0.0}
+      OUTLINE_MCP_PORT: ${OUTLINE_MCP_PORT:-6060}
+
+      # nginx-proxy configuration (only set in production)
+      VIRTUAL_HOST: ${VIRTUAL_HOST:-}
+      VIRTUAL_PORT: ${VIRTUAL_PORT:-}
+      LETSENCRYPT_HOST: ${LETSENCRYPT_HOST:-}
+      LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL:-}
+
+    env_file:
+      - .env
+    restart: unless-stopped
+    networks:
+      - webservices_net
+
+networks:
+  webservices_net:
+    external: ${NETWORK_EXTERNAL:-false}

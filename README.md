@@ -115,6 +115,42 @@ When using HTTP/SSE endpoints, you can provide the API key using any of these he
 
 If no header is provided, the server will fall back to the `OUTLINE_API_KEY` environment variable. If neither is available, the request will fail with an authentication error.
 
+### Multi-Instance Support
+
+🎉 **New Feature**: The server now supports connecting to multiple Outline instances!
+
+You can override both the API key and API URL on a per-request basis using headers:
+
+- `x-outline-api-key` or `outline-api-key`: API key for the specific instance
+- `x-outline-api-url` or `outline-api-url`: API URL for the specific instance
+
+**Example**: Connect to different Outline instances in different requests:
+
+```bash
+# Request to Instance 1
+curl -X POST http://localhost:6060/mcp \
+  -H "x-outline-api-key: instance1_key" \
+  -H "x-outline-api-url: https://outline1.example.com" \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc": "2.0", "method": "tools/list", "id": 1}'
+
+# Request to Instance 2
+curl -X POST http://localhost:6060/mcp \
+  -H "x-outline-api-key: instance2_key" \
+  -H "x-outline-api-url: https://outline2.example.com" \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc": "2.0", "method": "tools/list", "id": 1}'
+```
+
+**Note:** The `/api` suffix is automatically added if not present in the URL.
+
+**Priority Order**:
+1. Request headers (highest priority)
+2. Environment variables (fallback)
+3. Default URL: `https://app.getoutline.com/api` (if URL not specified)
+
+For detailed documentation, see [docs/multi-instance-support.md](docs/multi-instance-support.md).
+
 ### Env vars
 
 - `OUTLINE_API_KEY` (_required for stdio, optional for HTTP/SSE_): your API key for outline
