@@ -1,3 +1,10 @@
+# [5.8.0](https://github.com/mmmeff/outline-mcp-server/compare/v5.7.0...v5.8.0) (2025-12-28)
+
+
+### Features
+
+* **ci:** add version tag to docker image, run on semantic release version push ([f71a239](https://github.com/mmmeff/outline-mcp-server/commit/f71a23922c472d73deeb3839937d30d789ed158f))
+
 # [5.7.0](https://github.com/mmmeff/outline-mcp-server/compare/v5.6.2...v5.7.0) (2025-12-28)
 
 
