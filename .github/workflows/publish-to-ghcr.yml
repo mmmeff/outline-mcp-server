@@ -1,7 +1,8 @@
 name: Release Docker image
 on:
   push:
-    tags: ['v*']
+    tags: ["v*"]
+  workflow_dispatch:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
