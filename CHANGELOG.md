@@ -1,3 +1,10 @@
+## [5.8.2](https://github.com/mmmeff/outline-mcp-server/compare/v5.8.1...v5.8.2) (2025-12-28)
+
+
+### Bug Fixes
+
+* use latest ref for docker tagging ([3ed92dc](https://github.com/mmmeff/outline-mcp-server/commit/3ed92dca8bc3f5b6d603be4785f993218b5d9761))
+
 ## [5.8.1](https://github.com/mmmeff/outline-mcp-server/compare/v5.8.0...v5.8.1) (2025-12-28)
 
 
