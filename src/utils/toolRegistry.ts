@@ -1,12 +1,31 @@
-import type { ToolCallback } from '@modelcontextprotocol/sdk/server/mcp.js';
-import type { ZodRawShape } from 'zod';
+import type {
+  CallToolResult,
+  ServerRequest,
+  ServerNotification,
+} from '@modelcontextprotocol/sdk/types.js';
+import type { RequestHandlerExtra } from '@modelcontextprotocol/sdk/shared/protocol.js';
+import type z from 'zod';
 
-export type ToolDefinition<Args extends ZodRawShape, Output extends ZodRawShape> = {
+type ZodShape = Record<string, z.ZodTypeAny>;
+
+type ToolCallbackFn<Args extends ZodShape | undefined = undefined> = Args extends ZodShape
+  ? (
+      args: z.infer<z.ZodObject<Args>>,
+      extra: RequestHandlerExtra<ServerRequest, ServerNotification>
+    ) => CallToolResult | Promise<CallToolResult>
+  : (
+      extra: RequestHandlerExtra<ServerRequest, ServerNotification>
+    ) => CallToolResult | Promise<CallToolResult>;
+
+export type ToolDefinition<
+  Args extends ZodShape | undefined = undefined,
+  Output extends ZodShape | undefined = undefined,
+> = {
   name: string;
   description: string;
   inputSchema?: Args;
   outputSchema?: Output;
-  callback: ToolCallback<Args>;
+  callback: ToolCallbackFn<Args>;
 };
 
 // Context to store request-specific data
@@ -61,19 +80,20 @@ class ToolRegistry {
     return this.registry.has(name);
   }
 
-  get<Args extends ZodRawShape, Output extends ZodRawShape>(
-    name: string
-  ): ToolDefinition<Args, Output> | undefined {
+  get<
+    Args extends ZodShape | undefined = undefined,
+    Output extends ZodShape | undefined = undefined,
+  >(name: string): ToolDefinition<Args, Output> | undefined {
     return this.registry.get(name);
   }
 
   /**
    * Registers a tool with the global registry
    */
-  public register<Args extends ZodRawShape, Output extends ZodRawShape>(
-    name: string,
-    definition: ToolDefinition<Args, Output>
-  ): void {
+  public register<
+    Args extends ZodShape | undefined = undefined,
+    Output extends ZodShape | undefined = undefined,
+  >(name: string, definition: ToolDefinition<Args, Output>): void {
     if (this.has(name)) {
       throw new Error(`Attempted to register duplicate tool: "${name}"`);
     }
