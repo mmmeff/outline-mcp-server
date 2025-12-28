@@ -1,3 +1,10 @@
+## [5.6.1](https://github.com/mmmeff/outline-mcp-server/compare/v5.6.0...v5.6.1) (2025-12-28)
+
+
+### Bug Fixes
+
+* **dxt:** Windows DXT plugin for folders locations ([b425d8e](https://github.com/mmmeff/outline-mcp-server/commit/b425d8e82b9bb399e1a5fbc1c2e8147d3a9e7120)), closes [#28](https://github.com/mmmeff/outline-mcp-server/issues/28)
+
 # [5.6.0](https://github.com/mmmeff/outline-mcp-server/compare/v5.5.5...v5.6.0) (2025-10-12)
 
 
