@@ -32,22 +32,22 @@
     "semantic-release": "semantic-release"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "1.13.1",
-    "axios": "1.10.0",
-    "dotenv": "16.5.0",
-    "fastify": "5.4.0",
-    "omit-ts": "^2.0.1",
-    "zod": "3.25.67"
+    "@modelcontextprotocol/sdk": "1.13.x",
+    "axios": "1.x",
+    "dotenv": "17.x",
+    "fastify": "5.x",
+    "omit-ts": "2.x",
+    "zod": "3.x"
   },
   "devDependencies": {
-    "@semantic-release/changelog": "^6.0.3",
-    "@semantic-release/git": "^10.0.1",
-    "@types/node": "20.19.1",
-    "bun": "^1.2.17",
-    "concurrently": "^9.2.0",
-    "dotenv-cli": "^8.0.0",
-    "prettier": "3.6.0",
-    "semantic-release": "^22.0.12",
+    "@semantic-release/changelog": "6.x",
+    "@semantic-release/git": "10.x",
+    "@types/node": "22.x",
+    "bun": "1.x",
+    "concurrently": "9.x",
+    "dotenv-cli": "11.x",
+    "prettier": "3.x",
+    "semantic-release": "25.x",
     "typescript": "5.x"
   },
   "keywords": [
