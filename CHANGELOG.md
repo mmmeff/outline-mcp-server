@@ -1,3 +1,10 @@
+# [5.7.0](https://github.com/mmmeff/outline-mcp-server/compare/v5.6.2...v5.7.0) (2025-12-28)
+
+
+### Features
+
+* **deps:** update to latest versions of mcp SDK and zod ([79cf029](https://github.com/mmmeff/outline-mcp-server/commit/79cf029deae7a65a289937933ca8e6bc2e224682))
+
 ## [5.6.2](https://github.com/mmmeff/outline-mcp-server/compare/v5.6.1...v5.6.2) (2025-12-28)
 
 

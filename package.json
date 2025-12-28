@@ -1,6 +1,6 @@
 {
   "name": "outline-mcp-server",
-  "version": "5.6.2",
+  "version": "5.7.0",
   "description": "An MCP server for interacting with Outline's API",
   "type": "module",
   "bin": {
