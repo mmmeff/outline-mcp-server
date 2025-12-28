@@ -1,3 +1,10 @@
+## [5.6.2](https://github.com/mmmeff/outline-mcp-server/compare/v5.6.1...v5.6.2) (2025-12-28)
+
+
+### Bug Fixes
+
+* **listDocuments:** remove invalid query arg ([1bd48b4](https://github.com/mmmeff/outline-mcp-server/commit/1bd48b49aa736dc6373c0b20ed8130040250ed97)), closes [#33](https://github.com/mmmeff/outline-mcp-server/issues/33)
+
 ## [5.6.1](https://github.com/mmmeff/outline-mcp-server/compare/v5.6.0...v5.6.1) (2025-12-28)
 
 
