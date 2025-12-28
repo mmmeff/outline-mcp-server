@@ -1,3 +1,10 @@
+## [5.8.1](https://github.com/mmmeff/outline-mcp-server/compare/v5.8.0...v5.8.1) (2025-12-28)
+
+
+### Bug Fixes
+
+* force run docker release after version publish ([783b8f5](https://github.com/mmmeff/outline-mcp-server/commit/783b8f547586896b1d4225cdc2527eea762874da))
+
 # [5.8.0](https://github.com/mmmeff/outline-mcp-server/compare/v5.7.0...v5.8.0) (2025-12-28)
 
 
