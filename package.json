@@ -42,7 +42,7 @@
   "devDependencies": {
     "@semantic-release/changelog": "6.x",
     "@semantic-release/git": "10.x",
-    "@types/node": "22.x",
+    "@types/node": "24.x",
     "bun": "1.x",
     "concurrently": "9.x",
     "dotenv-cli": "11.x",
@@ -58,6 +58,6 @@
   ],
   "license": "MIT",
   "engines": {
-    "node": ">=20"
+    "node": ">=24"
   }
 }

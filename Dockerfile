@@ -1,12 +1,12 @@
 # Minimal Multi-stage Dockerfile for outline-mcp-server
-FROM node:20-alpine AS build
+FROM node:24-alpine AS build
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci --ignore-scripts
 COPY . .
 RUN npm run build
 
-FROM node:20-alpine
+FROM node:24-alpine
 LABEL org.opencontainers.image.source="https://github.com/mmmeff/outline-mcp-server" \
   org.opencontainers.image.licenses="MIT" \
   org.opencontainers.image.description="Outline MCP Server: ships as Docker image and npm package"
