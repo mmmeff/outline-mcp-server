@@ -16,6 +16,14 @@ One click install in Cursor:
 
 You can now download a Claude Desktop extension from the [releases page](https://github.com/mmmeff/outline-mcp/releases) for quick and easy setup (just double click it).
 
+### Claude Code
+
+Add the Outline MCP server to Claude Code with:
+
+```bash
+claude mcp add outline -s user -t stdio -e OUTLINE_API_KEY=... -- npx -y --package=outline-mcp-server@latest -c outline-mcp-server-stdio
+```
+
 ### Other Methods
 
 This MCP server can be added to just about any agent with an appropriate command defining `npx` and env vars. Read below for more info on how to run the server manually.
