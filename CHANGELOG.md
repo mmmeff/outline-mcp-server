@@ -1,3 +1,10 @@
+## [5.8.3](https://github.com/mmmeff/outline-mcp-server/compare/v5.8.2...v5.8.3) (2026-01-11)
+
+
+### Bug Fixes
+
+* **claude:** Remove bun from project to fix claude desktop usage ([8a22064](https://github.com/mmmeff/outline-mcp-server/commit/8a220645b288ef5590e5bd8766343d51bd6a6a77)), closes [#37](https://github.com/mmmeff/outline-mcp-server/issues/37)
+
 ## [5.8.2](https://github.com/mmmeff/outline-mcp-server/compare/v5.8.1...v5.8.2) (2025-12-28)
 
 
