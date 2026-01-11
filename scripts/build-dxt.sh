@@ -45,7 +45,7 @@ fi
 # Install dependencies in dist
 echo "📦 Installing production dependencies..."
 cd dist
-npm install --production --silent
+npm install --production --silent --ignore-scripts --no-audit --no-fund
 cd ..
 
 # Create the DXT package
