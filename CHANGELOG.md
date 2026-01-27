@@ -1,3 +1,10 @@
+## [5.8.4](https://github.com/mmmeff/outline-mcp-server/compare/v5.8.3...v5.8.4) (2026-01-27)
+
+
+### Bug Fixes
+
+* **ci:** bump release ([44ab5f6](https://github.com/mmmeff/outline-mcp-server/commit/44ab5f610325ccf6d2a2c0da1bc50ec31ed97a98))
+
 ## [5.8.3](https://github.com/mmmeff/outline-mcp-server/compare/v5.8.2...v5.8.3) (2026-01-11)
 
 
