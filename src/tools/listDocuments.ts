@@ -31,7 +31,7 @@ toolRegistry.register('list_documents', {
     try {
       // Create the payload object
       const payload: Record<string, any> = {
-        offset: args.offset || 1,
+        offset: args.offset ?? 0,
         limit: args.limit || 25,
         sort: args.sort || 'updatedAt',
         direction: args.direction || 'DESC',
