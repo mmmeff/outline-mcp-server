@@ -1,3 +1,11 @@
+## [5.8.5](https://github.com/mmmeff/outline-mcp-server/compare/v5.8.4...v5.8.5) (2026-02-03)
+
+
+### Bug Fixes
+
+* **dxt:** add quiet option to dotenv config to prevent stdout pollution in stdio mode ([#41](https://github.com/mmmeff/outline-mcp-server/issues/41)) ([6b7d78c](https://github.com/mmmeff/outline-mcp-server/commit/6b7d78c191917d8b7fc77dcda73cf664033555b3))
+* **listDocuments:** correct default offset in listDocuments to not skip first document ([#40](https://github.com/mmmeff/outline-mcp-server/issues/40)) ([ab1ab23](https://github.com/mmmeff/outline-mcp-server/commit/ab1ab23454d8094a4eae5a2f3984e9fe2572b367))
+
 ## [5.8.4](https://github.com/mmmeff/outline-mcp-server/compare/v5.8.3...v5.8.4) (2026-01-27)
 
 
