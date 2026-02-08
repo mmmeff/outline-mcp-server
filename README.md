@@ -49,6 +49,7 @@ This MCP server can be added to just about any agent with an appropriate command
   - ✅ Create and update collections
 
 - **Comment Management**
+  - ✅ List comments for documents and collections
   - ✅ Create comments on documents
   - ✅ Update existing comments
   - ✅ Delete comments
