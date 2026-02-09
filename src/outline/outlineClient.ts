@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 import { RequestContext } from '../utils/toolRegistry.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-config({ path: join(__dirname, '..', '.env') });
+config({ path: join(__dirname, '..', '.env'), quiet: true });
 
 const DEFAULT_API_URL = 'https://app.getoutline.com/api';
 

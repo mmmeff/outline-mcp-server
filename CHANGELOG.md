@@ -1,3 +1,67 @@
+## [5.8.5](https://github.com/mmmeff/outline-mcp-server/compare/v5.8.4...v5.8.5) (2026-02-03)
+
+
+### Bug Fixes
+
+* **dxt:** add quiet option to dotenv config to prevent stdout pollution in stdio mode ([#41](https://github.com/mmmeff/outline-mcp-server/issues/41)) ([6b7d78c](https://github.com/mmmeff/outline-mcp-server/commit/6b7d78c191917d8b7fc77dcda73cf664033555b3))
+* **listDocuments:** correct default offset in listDocuments to not skip first document ([#40](https://github.com/mmmeff/outline-mcp-server/issues/40)) ([ab1ab23](https://github.com/mmmeff/outline-mcp-server/commit/ab1ab23454d8094a4eae5a2f3984e9fe2572b367))
+
+## [5.8.4](https://github.com/mmmeff/outline-mcp-server/compare/v5.8.3...v5.8.4) (2026-01-27)
+
+
+### Bug Fixes
+
+* **ci:** bump release ([44ab5f6](https://github.com/mmmeff/outline-mcp-server/commit/44ab5f610325ccf6d2a2c0da1bc50ec31ed97a98))
+
+## [5.8.3](https://github.com/mmmeff/outline-mcp-server/compare/v5.8.2...v5.8.3) (2026-01-11)
+
+
+### Bug Fixes
+
+* **claude:** Remove bun from project to fix claude desktop usage ([8a22064](https://github.com/mmmeff/outline-mcp-server/commit/8a220645b288ef5590e5bd8766343d51bd6a6a77)), closes [#37](https://github.com/mmmeff/outline-mcp-server/issues/37)
+
+## [5.8.2](https://github.com/mmmeff/outline-mcp-server/compare/v5.8.1...v5.8.2) (2025-12-28)
+
+
+### Bug Fixes
+
+* use latest ref for docker tagging ([3ed92dc](https://github.com/mmmeff/outline-mcp-server/commit/3ed92dca8bc3f5b6d603be4785f993218b5d9761))
+
+## [5.8.1](https://github.com/mmmeff/outline-mcp-server/compare/v5.8.0...v5.8.1) (2025-12-28)
+
+
+### Bug Fixes
+
+* force run docker release after version publish ([783b8f5](https://github.com/mmmeff/outline-mcp-server/commit/783b8f547586896b1d4225cdc2527eea762874da))
+
+# [5.8.0](https://github.com/mmmeff/outline-mcp-server/compare/v5.7.0...v5.8.0) (2025-12-28)
+
+
+### Features
+
+* **ci:** add version tag to docker image, run on semantic release version push ([f71a239](https://github.com/mmmeff/outline-mcp-server/commit/f71a23922c472d73deeb3839937d30d789ed158f))
+
+# [5.7.0](https://github.com/mmmeff/outline-mcp-server/compare/v5.6.2...v5.7.0) (2025-12-28)
+
+
+### Features
+
+* **deps:** update to latest versions of mcp SDK and zod ([79cf029](https://github.com/mmmeff/outline-mcp-server/commit/79cf029deae7a65a289937933ca8e6bc2e224682))
+
+## [5.6.2](https://github.com/mmmeff/outline-mcp-server/compare/v5.6.1...v5.6.2) (2025-12-28)
+
+
+### Bug Fixes
+
+* **listDocuments:** remove invalid query arg ([1bd48b4](https://github.com/mmmeff/outline-mcp-server/commit/1bd48b49aa736dc6373c0b20ed8130040250ed97)), closes [#33](https://github.com/mmmeff/outline-mcp-server/issues/33)
+
+## [5.6.1](https://github.com/mmmeff/outline-mcp-server/compare/v5.6.0...v5.6.1) (2025-12-28)
+
+
+### Bug Fixes
+
+* **dxt:** Windows DXT plugin for folders locations ([b425d8e](https://github.com/mmmeff/outline-mcp-server/commit/b425d8e82b9bb399e1a5fbc1c2e8147d3a9e7120)), closes [#28](https://github.com/mmmeff/outline-mcp-server/issues/28)
+
 # [5.6.0](https://github.com/mmmeff/outline-mcp-server/compare/v5.5.5...v5.6.0) (2025-10-12)
 
 

@@ -1,1 +1,1 @@
-The Outline API is not purely RESTful. All endpoints use POST and never GET, PUT, or any other HTTP method.
+The Outline API is not purely RESTful. All endpoints use POST and never GET, PUT, or any other HTTP method. 

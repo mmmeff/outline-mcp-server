@@ -6,17 +6,28 @@ A Model Context Protocol (MCP) server that provides tools for interacting with [
 
 ## Quick Installation
 
-### Claude Desktop
-
-🎉 **`outline-mcp-server` now has an extension for Claude Desktop!**
-
-You can now download a Claude Desktop extension from the [releases page](https://github.com/mmmeff/outline-mcp/releases) for quick and easy setup (just double click it).
-
 ### Cursor
 
 One click install in Cursor:
 
 [![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=outline&config=eyJjb21tYW5kIjoibnB4IC15IC0tcGFja2FnZT1vdXRsaW5lLW1jcC1zZXJ2ZXJAbGF0ZXN0IC1jIG91dGxpbmUtbWNwLXNlcnZlci1zdGRpbyIsImVudiI6eyJPVVRMSU5FX0FQSV9LRVkiOiI8UkVQTEFDRV9NRT4iLCJPVVRMSU5FX0FQSV9VUkwiOiJodHRwczovL2FwcC5nZXRvdXRsaW5lLmNvbS9hcGkifX0%3D)
+
+### Claude Desktop
+
+You can now download a Claude Desktop extension from the [releases page](https://github.com/mmmeff/outline-mcp/releases) for quick and easy setup (just double click it).
+
+### Claude Code
+
+Add the Outline MCP server to Claude Code with:
+
+```bash
+claude mcp add outline -s user -t stdio -e OUTLINE_API_KEY=... -- npx -y --package=outline-mcp-server@latest -c outline-mcp-server-stdio
+```
+
+### Other Methods
+
+This MCP server can be added to just about any agent with an appropriate command defining `npx` and env vars. Read below for more info on how to run the server manually.
+[Jump to Running &rarr;](#running)
 
 ## Features
 
@@ -39,6 +50,7 @@ One click install in Cursor:
   - ✅ Create and update collections
 
 - **Comment Management**
+  - ✅ List comments for documents and collections
   - ✅ Create comments on documents
   - ✅ Update existing comments
   - ✅ Delete comments
@@ -50,7 +62,7 @@ One click install in Cursor:
 
 ### Prerequisites
 
-- Node.js (v20 or higher)
+- Node.js (v24 or higher)
 - Outline account with API access
 - Outline API key with appropriate permissions
 - Note: if you need to use the AI-powered ask feature, you must enable the "AI Answers" feature in your Outline Workspace settings

@@ -8,11 +8,10 @@ toolRegistry.register('list_documents', {
   name: 'list_documents',
   description: 'List documents in the Outline workspace with optional filters',
   inputSchema: {
-    query: z.string().optional().describe('Search query to filter documents (optional)'),
-    collectionId: z.string().optional().describe('Filter by collection ID (optional)'),
-    limit: z.number().optional().describe('Maximum number of documents to return (optional)'),
-    offset: z.number().optional().describe('Pagination offset (optional)'),
-    sort: z.string().optional().describe('Field to sort by (e.g. "updatedAt") (optional)'),
+    collectionId: z.string().describe('Filter by collection ID (optional)').optional(),
+    limit: z.number().describe('Maximum number of documents to return (optional)').optional(),
+    offset: z.number().describe('Pagination offset (optional)').optional(),
+    sort: z.string().describe('Field to sort by (e.g. "updatedAt") (optional)').optional(),
     direction: z
       .enum(['ASC', 'DESC'])
       .optional()
@@ -30,8 +29,13 @@ toolRegistry.register('list_documents', {
   },
   async callback(args) {
     try {
-      // Build payload with only explicitly provided parameters
-      const payload: Record<string, any> = {};
+      // Create the payload object
+      const payload: Record<string, any> = {
+        offset: args.offset ?? 0,
+        limit: args.limit || 25,
+        sort: args.sort || 'updatedAt',
+        direction: args.direction || 'DESC',
+      };
 
       // Only add pagination parameters if explicitly provided
       if (args.offset !== undefined) {
@@ -50,9 +54,24 @@ toolRegistry.register('list_documents', {
         payload.direction = args.direction;
       }
 
-      // Only add query if it's provided
-      if (args.query) {
-        payload.query = args.query;
+      // Only add collectionId if it's provided
+      if (args.collectionId) {
+        payload.collectionId = args.collectionId;
+      }
+
+      // Only add userId if it's provided
+      if (args.userId) {
+        payload.userId = args.userId;
+      }
+
+      // Only add backlinkDocumentId if it's provided
+      if (args.backlinkDocumentId) {
+        payload.backlinkDocumentId = args.backlinkDocumentId;
+      }
+
+      // Only add parentDocumentId if it's provided
+      if (args.parentDocumentId) {
+        payload.parentDocumentId = args.parentDocumentId;
       }
 
       // Only add optional filter parameters if they have actual values
