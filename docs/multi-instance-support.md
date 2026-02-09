@@ -99,30 +99,6 @@ The API URL is optional. If not provided via headers or environment variables, i
 
 ## Implementation Details
 
-### Modified Files
-
-1. **[`src/utils/toolRegistry.ts`](../src/utils/toolRegistry.ts)**
-   - Added `getApiUrl()` and `setApiUrl()` methods to `RequestContext` class
-
-2. **[`src/index.ts`](../src/index.ts)**
-   - Added `extractApiUrl()` function to parse headers
-   - Updated `setupRequestContext()` to handle API URL with clear logging
-
-3. **[`src/outline/outlineClient.ts`](../src/outline/outlineClient.ts)**
-   - Modified `createOutlineClient()` to accept `apiUrl` parameter
-   - Updated `getOutlineClient()` to use context API URL
-   - Changed `API_URL` constant to `DEFAULT_API_URL`
-
-4. **[`.env.example`](./.env.example)**
-   - Added documentation about multi-instance support
-
-### Backward Compatibility
-
-All existing functionality is preserved:
-- ✅ Environment variable configuration still works
-- ✅ Default API URL (`https://app.getoutline.com/api`) is maintained
-- ✅ Existing deployments require no changes
-- ✅ STDIO mode unchanged
 
 ## Security Considerations
 
