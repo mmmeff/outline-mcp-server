@@ -117,7 +117,7 @@ If no header is provided, the server will fall back to the `OUTLINE_API_KEY` env
 
 ### Multi-Instance Support
 
-🎉 **New Feature**: The server now supports connecting to multiple Outline instances!
+The server supports connecting to multiple Outline instances.
 
 You can override both the API key and API URL on a per-request basis using headers:
 
