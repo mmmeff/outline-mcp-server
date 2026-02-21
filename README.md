@@ -91,7 +91,7 @@ Add the following MCP definition to your configuration:
 {
   "outline": {
     "command": "npx",
-    "args": ["-y", "outline-mcp-server-stdio@latest"],
+    "args": ["-y", "--package=outline-mcp-server@latest", "-c", "outline-mcp-server-stdio"],
     "env": {
       "OUTLINE_API_KEY": "<REPLACE_ME>",
       "OUTLINE_API_URL": "https://app.getoutline.com/api",
