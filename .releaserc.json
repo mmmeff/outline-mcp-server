@@ -9,6 +9,7 @@
     [
       "@semantic-release/github",
       {
+        "labels": [],
         "assets": [
           {
             "path": "outline-mcp-extension.dxt",
