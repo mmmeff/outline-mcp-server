@@ -8,6 +8,7 @@ on:
 permissions:
   id-token: write
   contents: write
+  issues: write
 
 jobs:
   release:
@@ -25,6 +26,7 @@ jobs:
         with:
           node-version: "24.x"
           cache: "npm"
+          registry-url: "https://registry.npmjs.org"
 
       - name: Install dependencies
         run: npm ci
