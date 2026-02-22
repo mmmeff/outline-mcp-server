@@ -15,9 +15,6 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
-    id_tokens:
-      NPM_ID_TOKEN:
-        aud: "npm:registry.npmjs.org"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
