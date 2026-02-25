@@ -19,20 +19,38 @@ function extractApiKey(request: any): string | undefined {
 }
 
 /**
- * Sets up request context with API key
+ * Extracts API URL from request headers
+ */
+function extractApiUrl(request: any): string | undefined {
+  const headers = request.headers;
+  return headers['x-outline-api-url'] || headers['outline-api-url'];
+}
+
+/**
+ * Sets up request context with API key and API URL
  */
 function setupRequestContext(request: any): void {
   const apiKey = extractApiKey(request);
+  const apiUrl = extractApiUrl(request);
   const envApiKey = process.env.OUTLINE_API_KEY;
+  const envApiUrl = process.env.OUTLINE_API_URL;
 
+  const context = RequestContext.getInstance();
+
+  // Security: Prevent credential leakage - custom URL requires explicit API key
+  if (apiUrl && !apiKey) {
+    throw new Error(
+      'Security: Custom API URL requires explicit API key in x-outline-api-key header'
+    );
+  }
+
+  // Handle API key
   if (apiKey) {
     // Use header API key
-    const context = RequestContext.getInstance();
     context.setApiKey(apiKey);
     console.log('Using API key from request headers');
   } else if (envApiKey) {
     // Use environment variable API key
-    const context = RequestContext.getInstance();
     context.setApiKey(envApiKey);
     console.log('Using API key from environment variable');
   } else {
@@ -45,6 +63,18 @@ function setupRequestContext(request: any): void {
       'API key required: Set OUTLINE_API_KEY environment variable or provide x-outline-api-key header'
     );
   }
+
+  // Handle API URL
+  if (apiUrl) {
+    // Use header API URL
+    context.setApiUrl(apiUrl);
+    console.log(`Using API URL from request headers: ${apiUrl}`);
+  } else if (envApiUrl) {
+    // Use environment variable API URL
+    context.setApiUrl(envApiUrl);
+    console.log(`Using API URL from environment variable: ${envApiUrl}`);
+  }
+  // Note: API URL is optional, defaults to https://app.getoutline.com/api in outlineClient.ts
 }
 
 // HTTP mode - default behavior
