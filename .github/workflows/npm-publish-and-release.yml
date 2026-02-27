@@ -35,10 +35,27 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Verify build output
+        run: |
+          echo "Checking that all tool source files have corresponding build output..."
+          missing=0
+          for src in src/tools/*.ts; do
+            tool=$(basename "$src" .ts)
+            if [ ! -f "build/tools/$tool.js" ]; then
+              echo "ERROR: build/tools/$tool.js is missing (source: $src)"
+              missing=1
+            fi
+          done
+          if [ "$missing" -eq 1 ]; then
+            echo "Build verification failed: some tools were not compiled"
+            exit 1
+          fi
+          echo "All $(ls src/tools/*.ts | wc -l | tr -d ' ') tools verified successfully"
+
       - name: Semantic Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ""
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
 
   docker:
