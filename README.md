@@ -24,6 +24,12 @@ Add the Outline MCP server to Claude Code with:
 claude mcp add outline -s user -t stdio -e OUTLINE_API_KEY=... -- npx -y --package=outline-mcp-server@latest -c outline-mcp-server-stdio
 ```
 
+Or with [1Password CLI](#1password-cli):
+
+```bash
+claude mcp add outline -s user -t stdio -- op run --env-file=/path/to/.env.op -- npx -y --package=outline-mcp-server@latest -c outline-mcp-server-stdio
+```
+
 ### Other Methods
 
 This MCP server can be added to just about any agent with an appropriate command defining `npx` and env vars. Read below for more info on how to run the server manually.
@@ -102,12 +108,27 @@ Add the following MCP definition to your configuration:
 }
 ```
 
+Or with [1Password CLI](#1password-cli):
+
+```json
+{
+  "outline": {
+    "command": "op",
+    "args": [
+      "run", "--env-file=/path/to/.env.op", "--",
+      "npx", "-y", "outline-mcp-server-stdio@latest"
+    ]
+  }
+}
+```
+
 ### Authentication
 
-The Outline MCP server supports two authentication methods:
+The Outline MCP server supports three authentication methods:
 
 1. **Environment Variable (Required for stdio mode)**: Set `OUTLINE_API_KEY` as an environment variable
 2. **Request Headers (HTTP/SSE modes)**: Provide the API key in request headers
+3. **[1Password CLI](#1password-cli)**: Use `op run` to inject secrets from your vault (works with all modes)
 
 For **stdio mode**, the API key environment variable is required and validated on startup.
 
@@ -132,6 +153,35 @@ If no header is provided, the server will fall back to the `OUTLINE_API_KEY` env
 - `OUTLINE_API_URL` (_optional_): Alternative URL for your outline API (if using an alt domain/self-hosting)
 - `OUTLINE_MCP_PORT` (_optional_): Specify the port on which the server will run (default: 6060)
 - `OUTLINE_MCP_HOST` (_optional_): Host/IP to bind the server to (default: 127.0.0.1). Use 0.0.0.0 to bind to all network interfaces
+
+### 1Password CLI
+
+You can use the [1Password CLI](https://developer.1password.com/docs/cli/) to inject secrets instead of storing them in `.env` files or passing them as environment variables. The `op run` command resolves `op://` secret references before the Node process starts — no code changes or extra dependencies required.
+
+**Prerequisites:** [1Password CLI](https://developer.1password.com/docs/cli/get-started/) installed and signed in.
+
+**Setup:**
+
+1. Create a 1Password item (e.g. in a vault called "Dev", item called "outline") with a field named `api-key` containing your Outline API key. Optionally add an `api-url` field if self-hosting.
+
+2. Edit `.env.op` to match your vault/item path:
+
+   ```
+   OUTLINE_API_KEY=op://Dev/outline/api-key
+   # OUTLINE_API_URL=op://Dev/outline/api-url
+   ```
+
+3. Run with `op run`:
+
+   ```bash
+   # STDIO
+   op run --env-file=.env.op -- npx -y --package=outline-mcp-server@latest -c outline-mcp-server-stdio
+
+   # HTTP/SSE
+   op run --env-file=.env.op -- npx -y outline-mcp-server@latest
+   ```
+
+The `.env.op` file contains only `op://` reference URIs, not actual secrets, so it is safe to commit to version control.
 
 ### Usage
 
