@@ -35,6 +35,7 @@ This MCP server can be added to just about any agent with an appropriate command
   - ✅ Create new documents with customizable properties
   - ✅ Get document details
   - ✅ Update existing documents
+  - ✅ Apply unified diff patches to documents (efficient for large document updates)
   - ✅ Delete documents
   - ✅ List documents
   - ✅ Search documents
@@ -126,6 +127,44 @@ When using HTTP/SSE endpoints, you can provide the API key using any of these he
 
 If no header is provided, the server will fall back to the `OUTLINE_API_KEY` environment variable. If neither is available, the request will fail with an authentication error.
 
+### Multi-Instance Support
+
+The server supports connecting to multiple Outline instances.
+
+You can override both the API key and API URL on a per-request basis using headers:
+
+- `x-outline-api-key` or `outline-api-key`: API key for the specific instance
+- `x-outline-api-url` or `outline-api-url`: API URL for the specific instance
+
+**Security Note**: When providing a custom API URL via headers, you **must** also provide an explicit API key in the same request headers.
+
+**Example**: Connect to different Outline instances in different requests:
+
+```bash
+# Request to Instance 1
+curl -X POST http://localhost:6060/mcp \
+  -H "x-outline-api-key: instance1_key" \
+  -H "x-outline-api-url: https://outline1.example.com" \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc": "2.0", "method": "tools/list", "id": 1}'
+
+# Request to Instance 2
+curl -X POST http://localhost:6060/mcp \
+  -H "x-outline-api-key: instance2_key" \
+  -H "x-outline-api-url: https://outline2.example.com" \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc": "2.0", "method": "tools/list", "id": 1}'
+```
+
+**Note:** The `/api` suffix is automatically added if not present in the URL.
+
+**Priority Order**:
+1. Request headers (highest priority)
+2. Environment variables (fallback)
+3. Default URL: `https://app.getoutline.com/api` (if URL not specified)
+
+For detailed documentation, see [docs/multi-instance-support.md](docs/multi-instance-support.md).
+
 ### Env vars
 
 - `OUTLINE_API_KEY` (_required for stdio, optional for HTTP/SSE_): your API key for outline
@@ -145,6 +184,8 @@ Example queries your AI assistant can now handle:
 - "Ask a natural language question about your documents"
 - "Create a template from an existing document"
 - "Update the content of a document"
+- "Apply this patch to update the API documentation"
+- "Use git-style diff to update only the changed sections of the document"
 - "Add a comment to a document"
 
 ## Docker Usage

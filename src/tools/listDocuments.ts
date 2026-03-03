@@ -14,8 +14,8 @@ toolRegistry.register('list_documents', {
     sort: z.string().describe('Field to sort by (e.g. "updatedAt") (optional)').optional(),
     direction: z
       .enum(['ASC', 'DESC'])
-      .describe('Sort direction, either "ASC" or "DESC" (optional)')
-      .optional(),
+      .optional()
+      .describe('Sort direction, either "ASC" or "DESC" (optional)'),
     template: z.boolean().describe('Optionally filter to only templates (optional)').optional(),
     userId: z.string().describe('Optionally filter by user ID (optional)').optional(),
     parentDocumentId: z
@@ -37,9 +37,21 @@ toolRegistry.register('list_documents', {
         direction: args.direction || 'DESC',
       };
 
-      // Only add template if it's explicitly defined
-      if (args.template !== undefined) {
-        payload.template = args.template;
+      // Only add pagination parameters if explicitly provided
+      if (args.offset !== undefined) {
+        payload.offset = args.offset;
+      }
+
+      if (args.limit !== undefined) {
+        payload.limit = args.limit;
+      }
+
+      if (args.sort) {
+        payload.sort = args.sort;
+      }
+
+      if (args.direction) {
+        payload.direction = args.direction;
       }
 
       // Only add collectionId if it's provided
@@ -60,6 +72,28 @@ toolRegistry.register('list_documents', {
       // Only add parentDocumentId if it's provided
       if (args.parentDocumentId) {
         payload.parentDocumentId = args.parentDocumentId;
+      }
+
+      // Only add optional filter parameters if they have actual values
+      if (args.collectionId) {
+        payload.collectionId = args.collectionId;
+      }
+
+      if (args.userId) {
+        payload.userId = args.userId;
+      }
+
+      if (args.backlinkDocumentId) {
+        payload.backlinkDocumentId = args.backlinkDocumentId;
+      }
+
+      if (args.parentDocumentId) {
+        payload.parentDocumentId = args.parentDocumentId;
+      }
+
+      // Only add template if it's explicitly defined
+      if (args.template !== undefined) {
+        payload.template = args.template;
       }
 
       // Make the POST request to the documents.list endpoint

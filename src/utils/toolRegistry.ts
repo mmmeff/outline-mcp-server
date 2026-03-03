@@ -63,6 +63,14 @@ export class RequestContext {
   setApiKey(apiKey: string): void {
     this.set('apiKey', apiKey);
   }
+
+  getApiUrl(): string | undefined {
+    return this.get('apiUrl');
+  }
+
+  setApiUrl(apiUrl: string): void {
+    this.set('apiUrl', apiUrl);
+  }
 }
 
 class ToolRegistry {

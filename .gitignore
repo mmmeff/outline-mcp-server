@@ -6,3 +6,4 @@ dist/
 .DS_Store
 test-results/
 *.dxt
+.roo/mcp.json

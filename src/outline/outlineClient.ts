@@ -7,20 +7,43 @@ import { RequestContext } from '../utils/toolRegistry.js';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 config({ path: join(__dirname, '..', '.env'), quiet: true });
 
-const API_URL = process.env.OUTLINE_API_URL || 'https://app.getoutline.com/api';
+const DEFAULT_API_URL = 'https://app.getoutline.com/api';
 
 /**
- * Creates an Outline API client with the specified API key
+ * Normalizes the API URL by ensuring it ends with /api
  */
-export function createOutlineClient(apiKey?: string): AxiosInstance {
+function normalizeApiUrl(url: string): string {
+  if (!url) return DEFAULT_API_URL;
+  
+  const original = url;
+  
+  // Remove trailing slash if present
+  url = url.replace(/\/$/, '');
+  
+  // Add /api if not already present
+  if (!url.endsWith('/api')) {
+    url = `${url}/api`;
+  }
+  
+  console.error(`[URL Normalization] ${original} -> ${url}`);
+  
+  return url;
+}
+
+/**
+ * Creates an Outline API client with the specified API key and URL
+ */
+export function createOutlineClient(apiKey?: string, apiUrl?: string): AxiosInstance {
   const key = apiKey || process.env.OUTLINE_API_KEY;
+  const rawUrl = apiUrl || process.env.OUTLINE_API_URL || DEFAULT_API_URL;
+  const url = normalizeApiUrl(rawUrl);
 
   if (!key) {
     throw new Error('OUTLINE_API_KEY must be provided either as parameter or environment variable');
   }
 
   return axios.create({
-    baseURL: API_URL,
+    baseURL: url,
     headers: {
       Authorization: `Bearer ${key}`,
       'Content-Type': 'application/json',
@@ -30,14 +53,15 @@ export function createOutlineClient(apiKey?: string): AxiosInstance {
 }
 
 /**
- * Gets an outline client using context API key first, then environment variable
+ * Gets an outline client using context API key and URL first, then environment variables
  */
 export function getOutlineClient(): AxiosInstance {
   const context = RequestContext.getInstance();
   const contextApiKey = context.getApiKey();
+  const contextApiUrl = context.getApiUrl();
 
-  if (contextApiKey) {
-    return createOutlineClient(contextApiKey);
+  if (contextApiKey || contextApiUrl) {
+    return createOutlineClient(contextApiKey, contextApiUrl);
   }
 
   return createOutlineClient();
