@@ -13,6 +13,12 @@ toolRegistry.register('update_document', {
     text: z.string().describe('New content for the document in markdown format').optional(),
     publish: z.boolean().describe('Whether to publish the document').optional(),
     done: z.boolean().describe('Whether the document is marked as done').optional(),
+    icon: z
+      .string()
+      .describe(
+        'Emoji character to use as the document icon (e.g. "📋", "🚀"). Pass empty string to remove the icon.',
+      )
+      .optional(),
   },
   async callback(args) {
     try {
@@ -34,6 +40,11 @@ toolRegistry.register('update_document', {
 
       if (args.done !== undefined) {
         payload.done = args.done;
+      }
+
+      if (args.icon !== undefined) {
+        // Empty string means "remove the icon" — Outline API expects null to clear it
+        payload.icon = args.icon === '' ? null : args.icon;
       }
 
       const client = getOutlineClient();

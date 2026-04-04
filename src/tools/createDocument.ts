@@ -17,6 +17,10 @@ toolRegistry.register('create_document', {
       .optional(),
     publish: z.boolean().describe('Whether to publish the document immediately').optional(),
     template: z.boolean().describe('Whether this document is a template').optional(),
+    icon: z
+      .string()
+      .describe('Emoji character to use as the document icon (e.g. "📋", "🚀")')
+      .optional(),
   },
   async callback(args) {
     try {
@@ -36,6 +40,10 @@ toolRegistry.register('create_document', {
 
       if (args.template !== undefined) {
         payload.template = args.template;
+      }
+
+      if (args.icon !== undefined) {
+        payload.icon = args.icon;
       }
 
       const client = getOutlineClient();
