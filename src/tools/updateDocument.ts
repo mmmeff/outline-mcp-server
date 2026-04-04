@@ -43,7 +43,8 @@ toolRegistry.register('update_document', {
       }
 
       if (args.icon !== undefined) {
-        payload.icon = args.icon;
+        // Empty string means "remove the icon" — Outline API expects null to clear it
+        payload.icon = args.icon === '' ? null : args.icon;
       }
 
       const client = getOutlineClient();
