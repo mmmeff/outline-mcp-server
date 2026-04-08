@@ -7,7 +7,14 @@ import { RequestContext } from '../utils/toolRegistry.js';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 config({ path: join(__dirname, '..', '.env'), quiet: true });
 
-const API_URL = process.env.OUTLINE_API_URL || 'https://app.getoutline.com/api';
+function resolveApiUrl(): string {
+  if (process.env.OUTLINE_API_URL) return process.env.OUTLINE_API_URL;
+  if (process.env.OUTLINE_BASE_URL) {
+    return `${process.env.OUTLINE_BASE_URL.replace(/\/+$/, '')}/api`;
+  }
+  return 'https://app.getoutline.com/api';
+}
+const API_URL = resolveApiUrl();
 
 /**
  * Creates an Outline API client with the specified API key

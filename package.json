@@ -32,8 +32,12 @@
     "semantic-release": "semantic-release"
   },
   "dependencies": {
+    "@fastify/cookie": "^11.0.2",
+    "@fastify/cors": "^11.2.0",
+    "@fastify/formbody": "^8.0.2",
     "@modelcontextprotocol/sdk": "1.25.x",
     "axios": "1.x",
+    "better-sqlite3": "^12.8.0",
     "dotenv": "17.x",
     "fastify": "5.x",
     "omit-ts": "2.x",
@@ -42,6 +46,7 @@
   "devDependencies": {
     "@semantic-release/changelog": "6.x",
     "@semantic-release/git": "10.x",
+    "@types/better-sqlite3": "^7.6.13",
     "@types/node": "24.x",
     "concurrently": "9.x",
     "dotenv-cli": "11.x",
