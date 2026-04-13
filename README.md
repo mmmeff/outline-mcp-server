@@ -1,5 +1,5 @@
-[!IMPORTANT]
-** Note **: This project is no longer maintained as Outline has launched its own [official MCP server](https://docs.getoutline.com/s/guide/doc/mcp-6j9jtENNKL) with OAuth support. You should use that.
+> [!WARNING]
+> This project is no longer maintained as Outline has launched its own [official MCP server](https://docs.getoutline.com/s/guide/doc/mcp-6j9jtENNKL) with OAuth support. You should use that.
 
 ---
 
